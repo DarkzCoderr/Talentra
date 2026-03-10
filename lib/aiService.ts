@@ -5,7 +5,7 @@ import { CareerService } from './careerService';
 // ─── MISTRAL API ──────────────────────────────────────────────────────────────
 // Free API key from https://console.mistral.ai/
 // For now, this is a placeholder. You'll need to create a free account and paste your key here.
-const MISTRAL_API_KEY = 'Y39jhXSABJCupDUzprBkfOojh3sSMYK09';
+const MISTRAL_API_KEY = process.env.EXPO_PUBLIC_MISTRAL_API_KEY || 'Y39jhXSABJCupDUzprBkfOojh3sSMYK09';
 
 const CACHE_KEY = 'talentra_mistral_ai_cache';
 const CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours caching
@@ -42,7 +42,7 @@ export interface AIAnalysisResult {
     suggestions: AICareerSuggestion[];
     analysisNote: string;
     generatedAt: string;
-  source: 'remote' | 'local';
+    source: 'remote' | 'local';
 }
 
 // ─── Prompt builder ───────────────────────────────────────────────────────────
