@@ -1,50 +1,181 @@
-# Welcome to your Expo app 👋
+# Career Guide App 🚀
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A comprehensive Skill Recommendation and Career Guidance mobile app built with Expo, React Native, and Appwrite.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **User Authentication**: Secure login and registration with Appwrite
+- **Personalized Onboarding**: Multi-step questionnaire to understand user interests and background
+- **Career Recommendations**: AI-powered career path suggestions based on user profile
+- **Interactive Roadmaps**: Step-by-step learning paths for each career
+- **Progress Tracking**: Monitor your learning journey and completed modules
+- **Resource Library**: Curated learning resources for each career step
+- **Clean UI**: Modern, intuitive interface built with Tailwind CSS
 
-   ```bash
-   npm install
-   ```
+## Tech Stack
 
-2. Start the app
+- **Frontend**: React Native, Expo Router
+- **Styling**: Tailwind CSS, NativeWind
+- **Backend**: Appwrite (Authentication & Database)
+- **State Management**: React Hooks
+- **Navigation**: Expo Router (File-based routing)
 
-   ```bash
-   npx expo start
-   ```
+## Getting Started
 
-In the output, you'll find options to open the app in a
+### Prerequisites
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Node.js (v18 or higher)
+- npm or yarn
+- Expo CLI
+- Appwrite account
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 1. Install Dependencies
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Appwrite Setup
 
-## Learn more
+1. Create a new Appwrite project at [appwrite.io](https://appwrite.io)
+2. Enable Authentication (Email/Password)
+3. Create a Database
+4. Create the following collections:
+   - `users` (for user profiles and preferences)
+   - `careers` (for career data)
+   - `progress` (for tracking user progress)
 
-To learn more about developing your project with Expo, look at the following resources:
+### 3. Configure Appwrite
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Update `lib/appwrite.ts` with your Appwrite credentials:
 
-## Join the community
+```typescript
+export const appwriteConfig = {
+  endpoint: 'https://cloud.appwrite.io/v1',
+  projectId: 'YOUR_PROJECT_ID',
+  databaseId: 'YOUR_DATABASE_ID',
+  userCollectionId: 'USER_COLLECTION_ID',
+  careerCollectionId: 'CAREER_COLLECTION_ID',
+  progressCollectionId: 'PROGRESS_COLLECTION_ID',
+};
+```
 
-Join our community of developers creating universal apps.
+### 4. Run the App
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npx expo start
+```
+
+## Project Structure
+
+```
+app/
+├── (tabs)/           # Main tab navigation
+│   ├── index.tsx     # Home screen with recommendations
+│   ├── careers.tsx   # Browse all careers
+│   ├── progress.tsx  # Track learning progress
+│   ├── profile.tsx   # User profile and settings
+│   └── onboarding.tsx # Initial user questionnaire
+├── auth/             # Authentication screens
+│   ├── login.tsx     # Login screen
+│   └── register.tsx  # Registration screen
+├── career/
+│   └── [id].tsx      # Career detail and roadmap
+└── _layout.tsx       # Root layout configuration
+
+lib/
+├── appwrite.ts       # Appwrite configuration
+├── auth.ts          # Authentication service
+└── careerService.ts  # Career data and recommendations
+
+types/
+└── user.ts          # TypeScript type definitions
+```
+
+## Key Features Explained
+
+### Authentication Flow
+1. Users register/login with email and password
+2. After login, users complete a 3-step onboarding process
+3. User preferences are saved to Appwrite database
+
+### Career Recommendations
+- Based on user interests, educational background, and experience level
+- Includes hot career paths with high growth rates
+- Each career includes salary ranges and required skills
+
+### Interactive Roadmaps
+- Step-by-step learning paths for each career
+- Mark steps as completed to track progress
+- Curated resources (courses, books, videos, projects)
+- Prerequisites and estimated duration for each step
+
+### Progress Tracking
+- Visual progress indicators for each career path
+- Achievement system to motivate users
+- Current step tracking and resume functionality
+
+## Development
+
+### Adding New Careers
+
+Update `lib/careerService.ts` to add new career paths:
+
+```typescript
+const newCareer: Career = {
+  $id: 'unique-id',
+  title: 'Career Title',
+  description: 'Career description',
+  category: 'Category',
+  requiredSkills: ['Skill1', 'Skill2'],
+  averageSalary: '$X - $Y',
+  growthRate: 'Z%',
+  roadmap: [...],
+  isHot: true/false
+};
+```
+
+### Customizing UI
+
+The app uses Tailwind CSS for styling. Modify colors and layouts in the respective component files.
+
+### Database Schema
+
+**Users Collection:**
+- name: string
+- email: string
+- interests: string[]
+- background: string
+- experienceLevel: string
+- createdAt: timestamp
+
+**Careers Collection:**
+- title: string
+- description: string
+- category: string
+- requiredSkills: string[]
+- roadmap: object[]
+- isHot: boolean
+
+**Progress Collection:**
+- userId: string
+- careerId: string
+- completedSteps: string[]
+- currentStep: string
+- completionPercentage: number
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For questions or support, please open an issue in the repository.

@@ -1,0 +1,44 @@
+const DATABASE_ID = '69a8f69a001679f7823b';
+
+console.log('🚀 Setting up database collections...');
+
+// Note: Appwrite doesn't have a programmatic API for creating collections
+// You must create collections manually in the Appwrite Console
+// This script provides the structure and attributes needed
+
+console.log('📋 Database Structure Required:');
+console.log('================================');
+
+console.log('\n👤 Users Collection:');
+console.log('   Collection ID: USER_COLLECTION_ID');
+console.log('   Attributes:');
+console.log('   - userId (String, Required, Size: 255)');
+console.log('   - email (String, Required, Size: 255)');
+console.log('   - name (String, Required, Size: 255)');
+console.log('   - interests (String, Optional, Size: 500) - Store as comma-separated values');
+console.log('   - background (String, Optional, Size: 500)');
+console.log('   Permissions: Any (Read, Write, Delete)');
+
+console.log('\n📈 Progress Collection:');
+console.log('   Collection ID: PROGRESS_COLLECTION_ID');
+console.log('   Attributes:');
+console.log('   - userId (String, Required, Size: 255)');
+console.log('   - careerId (String, Required, Size: 255)');
+console.log('   - completedSteps (String Array, Required)');
+console.log('   - currentStep (String, Required, Size: 255)');
+console.log('   - completionPercentage (Integer, Required, Default: 0)');
+console.log('   Permissions: Any (Read, Write, Delete)');
+
+console.log('\n🔗 Database Configuration:');
+console.log('   Database ID:', DATABASE_ID);
+console.log('   Project ID: 69a8f15d00007bba2e71');
+console.log('   Endpoint: https://sgp.cloud.appwrite.io/v1');
+
+console.log('\n📖 Next Steps:');
+console.log('   1. Go to https://cloud.appwrite.io');
+console.log('   2. Select your project');
+console.log('   3. Go to Databases → Collections');
+console.log('   4. Create collections with the above specifications');
+console.log('   5. See DATABASE_SETUP.md for detailed instructions');
+
+console.log('\n🎉 Database setup guide complete!');
