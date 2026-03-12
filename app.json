@@ -15,16 +15,16 @@
       "package": "com.talentra.app",
       "adaptiveIcon": {
         "backgroundColor": "#0F172A",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets/images/talentra-logo.png",
+        "backgroundImage": "./assets/images/talentra-logo.png",
+        "monochromeImage": "./assets/images/talentra-logo.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/talentra-logo.png"
     },
     "plugins": [
       "expo-router",
